@@ -10,7 +10,6 @@ RUN apk update && \
 
 WORKDIR /wiki
 COPY package.json .
-RUN yarn --silent
 COPY ./dev/docker-postgres/init.sh ./init.sh
 
 ENV dockerdev 1

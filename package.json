@@ -6,8 +6,8 @@
   "main": "wiki.js",
   "dev": true,
   "scripts": {
-    "start": "node server",
-    "dev": "node dev",
+    "start": "node server --theme stratis",
+    "dev": "node dev --theme stratis",
     "build": "webpack --profile --config dev/webpack/webpack.prod.js",
     "watch": "webpack --config dev/webpack/webpack.dev.js",
     "test": "eslint --format codeframe --ext .js,.vue . && pug-lint server/views && jest"
@@ -167,6 +167,7 @@
     "yargs": "15.0.2"
   },
   "devDependencies": {
+    "@afgarcia86/ckeditor5": "^12.6.3",
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
@@ -182,7 +183,6 @@
     "@babel/preset-env": "^7.7.6",
     "@mdi/font": "4.7.95",
     "@panter/vue-i18next": "0.15.1",
-    "@requarks/ckeditor5": "12.4.0-wiki.14",
     "@vue/babel-preset-app": "4.1.1",
     "animate-sass": "0.8.2",
     "animated-number-vue": "1.0.0",

@@ -15,7 +15,7 @@
 <script>
 import _ from 'lodash'
 import { get, sync } from 'vuex-pathify'
-import DecoupledEditor from '@requarks/ckeditor5'
+import DecoupledEditor from '@afgarcia86/ckeditor5'
 
 export default {
   props: {
