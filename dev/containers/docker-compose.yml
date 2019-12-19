@@ -61,4 +61,4 @@ networks:
 
 volumes:
   db-data:
-  # solr-data:
+  solr-data:
