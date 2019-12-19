@@ -55,7 +55,6 @@ services:
       - "3000:3000"
     volumes:
       - .:/wiki
-      - /wiki/node_modules
     command: ["sh", "./dev/docker-postgres/init.sh"]
 
 networks:

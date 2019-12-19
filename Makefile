@@ -1,3 +1,5 @@
+VERSION = 0.0.1
+IMAGE = docker.bulogics.com/wiki2:v$(VERSION)
 SHELL := /bin/bash
 DEVDB := postgres
 
@@ -31,7 +33,8 @@ docker-dev-down: ## Shutdown dockerized dev environment
 	docker-compose -f ./dev/docker-${DEVDB}/docker-compose.yml -p wiki --project-directory . down --remove-orphans
 
 docker-dev-rebuild: ## Rebuild dockerized dev image
-	rm -rf ./node_modules
+	# rm -rf ./node_modules
+	# npm install
 	docker-compose -f ./dev/docker-${DEVDB}/docker-compose.yml -p wiki --project-directory . build --no-cache --force-rm
 
 docker-dev-clean: ## Clean DB and data folders
@@ -47,6 +50,12 @@ docker-dev-bash: ## Rebuild dockerized dev image
 docker-build: ## Run assets generation build in docker
 	docker-compose -f ./dev/docker-${DEVDB}/docker-compose.yml -p wiki --project-directory . run wiki yarn build
 	docker-compose -f ./dev/docker-${DEVDB}/docker-compose.yml -p wiki --project-directory . down
+
+docker:
+	docker build --build-arg NPM_TOKEN=$(NPM_TOKEN) -t $(IMAGE) -f dev/build/Dockerfile .
+
+push: docker
+	docker push $(IMAGE)
 
 help: ## Display help
 	@echo ''
