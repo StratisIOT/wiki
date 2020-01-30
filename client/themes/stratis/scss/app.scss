@@ -103,9 +103,9 @@ body .ck.ck-toolbar > .ck-toolbar__items{
       color: mc('grey', '500');
     }
 
-    & + h2, & + h3, & + h4, & + h5, & + h6 {
-      margin-top: 8px;
-    }
+    // & + h2, & + h3, & + h4, & + h5, & + h6 {
+    //   margin-top: 8px;
+    // }
   }
 
   h1 {
@@ -518,20 +518,19 @@ body .ck.ck-toolbar > .ck-toolbar__items{
   }
 
   p > code{
-    padding: 0.2rem 0.5rem;
-    background: #000;
+    padding: 0.1rem 0.4rem;
+    background: mc('blue-grey', '700');
     color: #fff;
-    border-radius: 5px;
+    font-weight: 400;
   }
 
   pre{
-    border: none;
+    border: 1px solid mc('blue-grey', '600');
     border-radius: 5px;
     box-shadow: initial;
-    background: #000;
+    background: mc('blue-grey', '700');
     padding: 1rem;
     margin: 1rem 0;
-    border: 1px solid #000;
     code{
       color: #fff;
     }
