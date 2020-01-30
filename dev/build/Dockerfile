@@ -33,7 +33,7 @@ RUN rm -f .npmrc
 # --- Release ---
 # ===============
 FROM node:12.14-alpine
-LABEL maintainer="requarks.io"
+LABEL maintainer="stratisiot.com"
 
 RUN apk add bash curl git openssh gnupg sqlite --no-cache && \
     mkdir -p /wiki && \
