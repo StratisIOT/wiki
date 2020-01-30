@@ -1,20 +1,20 @@
 {
   "name": "wiki",
-  "version": "2.0.0",
-  "releaseDate": "2019-01-01T01:01:01.000Z",
+  "version": "2.0.13-stratis.3",
+  "releaseDate": "2020-01-30T01:01:01.000Z",
   "description": "A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown",
   "main": "wiki.js",
-  "dev": true,
+  "dev": false,
   "scripts": {
-    "start": "node server",
-    "dev": "node dev",
+    "start": "node server --theme stratis",
+    "dev": "node dev --theme stratis",
     "build": "webpack --profile --config dev/webpack/webpack.prod.js",
     "watch": "webpack --config dev/webpack/webpack.dev.js",
     "test": "eslint --format codeframe --ext .js,.vue . && pug-lint server/views && jest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Requarks/wiki.git"
+    "url": "git+https://github.com/StratisIOT/wiki.git"
   },
   "keywords": [
     "wiki",

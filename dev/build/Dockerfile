@@ -23,8 +23,13 @@ COPY ./.eslintrc.yml ./.eslintrc.yml
 # RUN yarn --production --frozen-lockfile --non-interactive
 # COPY ./node_modules ./node_modules
 
+ARG NPM_TOKEN
+
 COPY ./.npmrc ./.npmrc
 RUN npm install
+RUN npm run build
+RUN rm -rf /wiki/node_modules
+RUN npm --only=production install
 RUN rm -f .npmrc
 
 # ===============
