@@ -1,7 +1,7 @@
 {
   "name": "wiki",
-  "version": "2.0.13-stratis.3",
-  "releaseDate": "2020-01-30T01:01:01.000Z",
+  "version": "2.2.39-stratis.3",
+  "releaseDate": "2020-03-25T01:01:01.000Z",
   "description": "A modern, lightweight and powerful wiki app built on NodeJS, Git and Markdown",
   "main": "wiki.js",
   "dev": false,
