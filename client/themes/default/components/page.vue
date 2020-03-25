@@ -7,7 +7,7 @@
       app
       clipped
       mobile-break-point='600'
-      :temporary='$vuetify.breakpoint.mdAndDown'
+      :temporary='$vuetify.breakpoint.smAndDown'
       v-model='navShown'
       :right='$vuetify.rtl'
       )
@@ -122,10 +122,17 @@
                   template(v-slot:activator='{ on }')
                     v-btn(icon, tile, v-on='on'): v-icon(color='grey') mdi-bookmark
                   span {{$t('common:page.bookmark')}}
-                v-tooltip(bottom)
-                  template(v-slot:activator='{ on }')
-                    v-btn(icon, tile, v-on='on'): v-icon(color='grey') mdi-share-variant
-                  span {{$t('common:page.share')}}
+                v-menu(offset-y, bottom, min-width='300')
+                  template(v-slot:activator='{ on: menu }')
+                    v-tooltip(bottom)
+                      template(v-slot:activator='{ on: tooltip }')
+                        v-btn(icon, tile, v-on='{ ...menu, ...tooltip }'): v-icon(color='grey') mdi-share-variant
+                      span {{$t('common:page.share')}}
+                  social-sharing(
+                    :url='pageUrl'
+                    :title='title'
+                    :description='description'
+                  )
                 v-tooltip(bottom)
                   template(v-slot:activator='{ on }')
                     v-btn(icon, tile, v-on='on', @click='print'): v-icon(color='grey') mdi-printer
@@ -218,11 +225,11 @@
         :right='$vuetify.rtl'
         :left='!$vuetify.rtl'
         small
-        depressed
+        :depressed='this.$vuetify.breakpoint.mdAndUp'
         @click='$vuetify.goTo(0, scrollOpts)'
         color='primary'
         dark
-        :style='$vuetify.rtl ? `right: 235px;` : `left: 235px;`'
+        :style='upBtnPosition'
         )
         v-icon mdi-arrow-up
 </template>
@@ -355,7 +362,8 @@ export default {
             background: '#64B5F6'
           }
         }
-      }
+      },
+      winWidth: 0
     }
   },
   computed: {
@@ -377,6 +385,14 @@ export default {
         })
         return result
       }, []))
+    },
+    pageUrl () { return window.location.href },
+    upBtnPosition () {
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        return this.$vuetify.rtl ? `right: 235px;` : `left: 235px;`
+      } else {
+        return this.$vuetify.rtl ? `right: 65px;` : `left: 65px;`
+      }
     }
   },
   created() {
@@ -395,9 +411,16 @@ export default {
     this.$store.commit('page/SET_MODE', 'view')
   },
   mounted () {
-    Prism.highlightAllUnder(this.$refs.container)
-    this.navShown = this.$vuetify.breakpoint.smAndUp
+    // -> Check side navigation visibility
+    this.handleSideNavVisibility()
+    window.addEventListener('resize', _.debounce(() => {
+      this.handleSideNavVisibility()
+    }, 500))
 
+    // -> Highlight Code Blocks
+    Prism.highlightAllUnder(this.$refs.container)
+
+    // -> Handle anchor scrolling
     this.$nextTick(() => {
       if (window.location.hash && window.location.hash.length > 1) {
         this.$vuetify.goTo(window.location.hash, this.scrollOpts)
@@ -440,6 +463,15 @@ export default {
     },
     pageDelete () {
       this.$root.$emit('pageDelete')
+    },
+    handleSideNavVisibility () {
+      if (window.innerWidth === this.winWidth) { return }
+      this.winWidth = window.innerWidth
+      if (this.$vuetify.breakpoint.mdAndUp) {
+        this.navShown = true
+      } else {
+        this.navShown = false
+      }
     }
   }
 }
