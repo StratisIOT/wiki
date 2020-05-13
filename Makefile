@@ -1,4 +1,4 @@
-VERSION = 2.0.13-stratis.3
+VERSION = 2.3.82-stratis.1
 IMAGE = docker.bulogics.com/wiki2:v$(VERSION)
 SHELL := /bin/bash
 DEVDB := postgres
